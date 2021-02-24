@@ -49,13 +49,9 @@ class ContactList extends Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => ({
   items: state.contacts.items,
-  filter: state.contacts.filter
-})
-
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

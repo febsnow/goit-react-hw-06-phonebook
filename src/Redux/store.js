@@ -15,11 +15,6 @@ const filterReducer = (state = "", { type, payload }) => {
 const itemsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actionTypes.ADD:
-      const existedContact = state.find((contact) => contact.name === payload.name);
-      if (existedContact) {
-        alert(`${payload.name} already exist`);
-        return state;
-      }
       return [...state, payload];
 
     case actionTypes.DELETE:

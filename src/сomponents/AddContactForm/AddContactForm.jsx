@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import actions from "../../Redux/actions";
+import ErrorPrompt from "../ErrorPrompt/ErrorPrompt";
 import styles from "./AddContactForm.module.css";
+import * as errorMsg from "../ErrorPrompt/ErrorPrompt.module.css";
+import { CSSTransition } from "react-transition-group";
 
 class AddContactForm extends Component {
- 
   state = {
     name: "",
     number: "",
+    message: null,
   };
 
   changeHandler = (e) => {
@@ -17,13 +20,39 @@ class AddContactForm extends Component {
   submitHandler = (evt) => {
     evt.preventDefault();
 
+    if (
+      this.props.items.find(
+        (contact) =>
+          contact.name.toLowerCase() === this.state.name.toLowerCase()
+      )
+    ) {
+      console.log(this.state.name);
+      this.setState({ message: `${this.state.name} already exist` });
+      this.setState({ name: "", number: "" });
+
+      return setTimeout(() => {
+        this.setState({ message: null });
+      }, 3000);
+    }
+
     this.props.onSubmit(this.state.name, this.state.number);
+
     this.setState({ name: "", number: "" });
   };
 
   render() {
     return (
       <>
+        <CSSTransition
+          appear={true}
+          in={this.state.message !== null}
+          timeout={300}
+          classNames={errorMsg}
+          unmountOnExit
+        >
+          <ErrorPrompt message={this.state.message} />
+        </CSSTransition>
+
         <form className={styles.contactsForm} onSubmit={this.submitHandler}>
           <label htmlFor="contactName" className={styles.label}>
             Name
@@ -86,7 +115,6 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     onSubmit: (name, number) => {
-      
       dispatch(actions.addContact(name, number));
     },
   };
