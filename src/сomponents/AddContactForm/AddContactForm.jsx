@@ -4,11 +4,7 @@ import actions from "../../Redux/actions";
 import styles from "./AddContactForm.module.css";
 
 class AddContactForm extends Component {
-  // static defaultProps = {
-  //   name: "",
-  //   number: "",
-  // };
-
+ 
   state = {
     name: "",
     number: "",
@@ -66,15 +62,15 @@ class AddContactForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.items,
+    items: state.contacts.items,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  // const existedContact = state.items.find((contact) => contact.name === name);
+  // const existedContact = this.props.items.find((contact) => contact.name === name);
 
   // if (existedContact) {
-  // this.setState({ error: `${newContact.name} already exist` });
+  // this.props.error({ error: `${newContact.name} already exist` });
   // return;
   // setTimeout(() => {
   //   this.setState({ error: null });
@@ -90,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     onSubmit: (name, number) => {
+      
       dispatch(actions.addContact(name, number));
     },
   };

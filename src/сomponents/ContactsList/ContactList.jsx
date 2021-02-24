@@ -4,11 +4,10 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./ContactList.css";
 import { connect } from "react-redux";
 import actions from "../../Redux/actions";
-import uniqid from "uniqid";
 
 class ContactList extends Component {
   static propTypes = {
-    list: PropTypes.array.isRequired,
+    // list: PropTypes.array.isRequired,
   };
 
   componentWillUnmount() {
@@ -16,12 +15,11 @@ class ContactList extends Component {
   }
 
   render() {
-    const { list, handleRemove } = this.props;
-    console.log(this.props);
+    const { items, handleRemove } = this.props;
+    console.log("list", this.props);
     return (
       <TransitionGroup component="ul" className="list">
-        {this.props.items.map((contact) => {
-          console.log(contact.id);
+        {items.map((contact) => {
           return (
             <CSSTransition
               appear={true}
@@ -51,12 +49,13 @@ class ContactList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.dir("CL", state);
-  return {
-    items: state.contacts.items,
-  };
-};
+
+
+const mapStateToProps = (state) => ({
+  items: state.contacts.items,
+  filter: state.contacts.filter
+})
+
 
 const mapDispatchToProps = (dispatch) => {
   return {

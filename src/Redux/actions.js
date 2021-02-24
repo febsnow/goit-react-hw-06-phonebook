@@ -15,7 +15,13 @@ const removeContact = (id) => ({
   payload: id,
 });
 
+const filterContacts = (value) => ({
+  type: actionTypes.FILTER,
+  payload: value,
+});
+
 export default {
   addContact,
   removeContact,
+  filterContacts,
 };
