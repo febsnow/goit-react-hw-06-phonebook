@@ -27,15 +27,8 @@ Filter.propTypes = {
   value: PropTypes.string,
 };
 
-
 const mapDispatchToProps = (dispatch) => ({
   onChange: (e) => dispatch(actions.filterContacts(e.target.value)),
 });
 
-const mapStateToProps = (state) => ({
- items: state.contacts.items,
-  filter: state.contacts.filter
- 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(null, mapDispatchToProps)(Filter);
