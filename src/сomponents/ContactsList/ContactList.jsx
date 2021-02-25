@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import "./ContactList.css";
 import { connect } from "react-redux";
 import actions from "../../Redux/actions";
+import "./ContactList.css";
 
 class ContactList extends Component {
   static propTypes = {
-    // list: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
+    handleRemove: PropTypes.func.isRequired
   };
 
   componentWillUnmount() {
@@ -16,7 +17,7 @@ class ContactList extends Component {
 
   render() {
     const { items, handleRemove } = this.props;
-    console.log("list", this.props);
+
     return (
       <TransitionGroup component="ul" className="list">
         {items.map((contact) => {
@@ -49,9 +50,22 @@ class ContactList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  items: state.contacts.items,
-});
+const getFiltredContacts = (contacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return contacts.filter(({ name }) =>
+    name.toLowerCase().includes(normalizedFilter)
+  );
+};
+
+const mapStateToProps = (state) => {
+  const { items, filter } = state.contacts;
+  const filteredContacts = getFiltredContacts(items, filter);
+ 
+  return {
+    items: filteredContacts
+  }
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -60,3 +74,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+
+
+// const mapStateToProps = ({ contacts: { items, filter } }) => ({
+//   items: getFiltredContacts(items, filter),
+// });

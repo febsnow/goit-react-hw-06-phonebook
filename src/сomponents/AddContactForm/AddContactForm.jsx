@@ -95,29 +95,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  // const existedContact = this.props.items.find((contact) => contact.name === name);
-
-  // if (existedContact) {
-  // this.props.error({ error: `${newContact.name} already exist` });
-  // return;
-  // setTimeout(() => {
-  //   this.setState({ error: null });
-  // }, 3000);
-  // }
-
-  // this.setState((prevState) => {
-  //   return {
-  //     contacts: [...prevState.contacts, newContact],
-  //     error: null,
-  //   };
-  // });
-
-  return {
-    onSubmit: (name, number) => {
-      dispatch(actions.addContact(name, number));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+ onSubmit: (name, number) => {
+ dispatch(actions.addContact(name, number));
+ },}
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddContactForm);

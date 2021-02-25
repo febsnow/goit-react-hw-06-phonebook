@@ -2,12 +2,10 @@
   width: 400px;
   padding: 20px 20px;
   border-radius: 30px;
-  /* border: 2px solid black; */
   background-color: lightgray;
   box-shadow: 5px 5px 5px 5px darkgray;
   height: fit-content;
-  margin: 0 auto;
-  overflow: hidden;
+  margin: 15px auto 0 auto;
 }
 
 .contactsList-appear {
@@ -19,14 +17,6 @@
   transform: translateY(0);
   transition: all 250ms linear;
 }
-/* .contactsList-enter {
-  opacity: 0;
-}
-
-.contactsList-enter-active {
-  opacity: 1;
-  transition: all 250ms linear;
-} */
 
 .contactsList-exit {
   opacity: 1;
