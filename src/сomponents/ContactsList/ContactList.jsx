@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   const filteredContacts = getFiltredContacts(items, filter);
  
   return {
-    items: filteredContacts
+     items: filteredContacts.length > 0 ? filteredContacts : items,
   }
 };
 
